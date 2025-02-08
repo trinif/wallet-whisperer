@@ -117,8 +117,8 @@ student_items = {
 }
 
 # Create an account to populate with information
-apiKey = "005ce1086097c7b1c72b2c0a185847da"
-requestURL = "http://api.nessieisreal.com/merchants?key=005ce1086097c7b1c72b2c0a185847da"
+apiKey = "1791db7671050f930946a58ec2de3ed2"
+requestURL = "http://api.nessieisreal.com/merchants?key=" + apiKey
 
 # Create merchant
 merchant = {
@@ -158,7 +158,7 @@ customer = {
   }
 }
 
-requestURL = "http://api.nessieisreal.com/customers?key=005ce1086097c7b1c72b2c0a185847da"
+requestURL = "http://api.nessieisreal.com/customers?key=" + apiKey
 
 response = requests.post( 
 	requestURL, 
@@ -166,7 +166,7 @@ response = requests.post(
 	headers={'content-type':'application/json'},
 )
 
-requestURL = "http://api.nessieisreal.com/merchants?key=005ce1086097c7b1c72b2c0a185847da"
+requestURL = "http://api.nessieisreal.com/merchants?key=" + apiKey
 
      
 customerId = response.json()['objectCreated']['_id']
@@ -179,7 +179,7 @@ account = {
   "balance": 500,
 }
 
-requestURL = "http://api.nessieisreal.com/customers/" + customerId + "/accounts?key=005ce1086097c7b1c72b2c0a185847da"
+requestURL = "http://api.nessieisreal.com/customers/" + customerId + "/accounts?key=" + apiKey
 print("acct request url: " + requestURL)
 response = requests.post( 
 	requestURL, 
@@ -191,7 +191,7 @@ print(response.json())
 
 accountId = response.json()['objectCreated']['_id']
 
-url = "http://api.nessieisreal.com/accounts/" + accountId + "/purchases?key=005ce1086097c7b1c72b2c0a185847da"
+url = "http://api.nessieisreal.com/accounts/" + accountId + "/purchases?key=" + apiKey
 
 
 # Generate and log 100 purchases
@@ -224,4 +224,3 @@ for i, (item, price_range) in enumerate(random.sample(student_items.items(), 100
     # Add delay to avoid hitting API rate limits
     time.sleep(0.5)
 
-# Transfer populated Capital One data to MongoDB

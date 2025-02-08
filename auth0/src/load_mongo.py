@@ -1,8 +1,9 @@
 import requests
 from pymongo import MongoClient
 
-accountId = "67a7acc69683f20dd518bc2e"
-requestURL = "http://api.nessieisreal.com/accounts/" + accountId + "/purchases?key=005ce1086097c7b1c72b2c0a185847da"
+key = "1791db7671050f930946a58ec2de3ed2"
+accountId = "67a7bb309683f20dd518bcae"
+requestURL = "http://api.nessieisreal.com/accounts/" + accountId + "/purchases?key=" + key
 
 # Get Capital One data (JSON) and populate MongoDB
 data = requests.get(requestURL).json()
