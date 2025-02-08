@@ -14,13 +14,15 @@ app.get("/userid", (req, res) => {
 });
 
 app.post("/updateLookupTable", (req, res) => {
-    // console.log(req.body);
-    fs.appendFile("userid.json", JSON.stringify(req.body, null, 2).concat(","), (err) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
+    console.log(req.body);
+    const data = fs.readFileSync("userid.json", "utf8");
+    var text = JSON.parse(data);
+    console.log(text);
+    text.push(req.body);
+    console.log(text);
+    fs.writeFile("userid.json", JSON.stringify(text, null, 2), (err) => err && console.error(err));
+    /* fs.appendFile("userid.json", ",\n"); */
     res.json({ message: "File updated successfully" });
   });
-});
 
 app.listen(3002, () => console.log("Server running on port 3002"));
