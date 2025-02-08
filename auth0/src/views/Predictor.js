@@ -39,10 +39,39 @@ const styles = {
     borderRadius: '5px',
     width: '100%',
     transition: 'backgroundColor 0.3s ease',
-}
+  }
 };
 
 export const PredictorComponent = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Store form data as JSON
+    const data = {
+      amount: document.getElementById("amount").value,
+      merchant_id: document.getElementById("merchant").value,
+      description: document.getElementById("description").value
+    };
+
+    try {
+      // Flask server for predictions is localhost:5000 by default
+      const response = await fetch('http://localhost:5000/predict', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      console.log(response.body);
+
+      // Handle the response
+      const result = await response.json();
+      console.log(result)
+      
+    } catch (ex) {
+      console.error('Error fetching prediction:', ex);
+    }
+  };
 
   return (
     <>

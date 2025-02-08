@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.metrics import accuracy_score, confusion_matrix
+import joblib
 
 # Set up MongoDB connection
 client = MongoClient('mongodb+srv://neha:mongodb321!@walletwhisperer.gykjp.mongodb.net/') # Add mongodb url
@@ -49,3 +50,6 @@ cm = confusion_matrix(y_test, y_pred)
 
 print(cm)
 print(f"Accuracy: {accuracy * 100:.2f}%")
+
+# Save model
+joblib.dump(model, "models/prediction_model.joblib")
