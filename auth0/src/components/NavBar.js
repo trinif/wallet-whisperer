@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect } from 'react';
 
 import {
   Collapse,
@@ -30,12 +31,22 @@ const NavBar = () => {
   } = useAuth0();
   const toggle = () => setIsOpen(!isOpen);
 
+  const updateStatus = () => {
+    fetch("/updateLookupTable", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pending: "🟡 Pending", approved: "✅ Approved", new_status: "🌟 New Status" }),
+    }).then((res) => res.json()).then(console.log);
+  };
+
+  /* loginWithRedirect.then(updateStatus()); */
+
   const logoutWithRedirect = () =>
     logout({
         logoutParams: {
           returnTo: window.location.origin,
         }
-    });
+    }).then(console.log("logged out"));
 
   return (
     <div className="nav-container">
@@ -75,7 +86,7 @@ const NavBar = () => {
                     id="qsLoginBtn"
                     color="primary"
                     className="btn-margin"
-                    onClick={() => loginWithRedirect()}
+                    onClick={() => loginWithRedirect().then(console.log("logged in")).finally(console.log("login"))}
                   >
                     Log in
                   </Button>
