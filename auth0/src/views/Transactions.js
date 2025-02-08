@@ -88,7 +88,7 @@ export const TransactionsComponent = () => {
               <TableCell>{t.amount}</TableCell>
               <TableCell>
                 <Slider
-                  value={[1]}
+                  value={[]}
                   min={1}
                   max={5}
                   step={1}
