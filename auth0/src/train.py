@@ -19,9 +19,10 @@ df = pd.DataFrame(data)
 columns = df.columns.tolist()
 
 # Merchant and Purpose are categorical variables, Satisfaction is 1-5 scale
+print(df.loc[:,['description', 'amount', 'satisfaction']])
+
 X = df[['amount', 'merchant_id', 'description']]
-print(df['description'].head())
-y = df['status']  # Target variable
+y = df['satisfaction']  # Target variable
 
 # Encode categorical variables (merchant and purpose)
 X['merchant_id'] = LabelEncoder().fit_transform(X['merchant_id'])
