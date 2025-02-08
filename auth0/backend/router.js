@@ -1,4 +1,5 @@
 import express from 'express'; 
+
 import { 
     getUserById, 
     getAllUsers, 
@@ -12,8 +13,7 @@ from './application/controllers/UserController.js';
 import getDirections
 from './application/controllers/DirectionsController.js';
 
-import getCustomers
-from './application/controllers/CustomerController.js';
+import { getCustomers, getTransactions } from './application/controllers/CustomerController.js'; // Correct path to the controller
 
 const router = express.Router(); 
 
@@ -26,6 +26,7 @@ router.put("user/username", updatePasswordByUsername);
 router.put("user/email", updateEmailByUsername);
 router.get("/api/directions", getDirections);
 router.get("/customers", getCustomers); 
+router.get("/transactions", getTransactions); 
 
 
 export default router; 

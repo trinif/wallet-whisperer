@@ -11,6 +11,7 @@ export const TransactionsComponent = () => {
   const [customers, setCustomers] = useState([]); // State to hold customer data
   const [loading, setLoading] = useState(true); 
   
+  
   const loadCustomers = () => {
     axios.get("http://localhost:3000/customers")
       .then((response) => {

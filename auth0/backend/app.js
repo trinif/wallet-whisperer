@@ -2,8 +2,6 @@ import express, { Router } from 'express';
 import router from './router.js';
 import dotenv from 'dotenv';
 import cors from 'cors'
-import directionsRouter from './application/controllers/DirectionsController.js';
-import customersRouter from './application/controllers/CustomerController.js';
 
 
 dotenv.config();
@@ -16,8 +14,7 @@ server.use(cors({
 
 server.use(express.json());
 server.use(router);
-server.use('/api/directions', directionsRouter);
-server.use('/customers', customersRouter);
+//server.use('/api/directions', directionsRouter);
 
 
 const PORT = process.env.PORT || 3000;
