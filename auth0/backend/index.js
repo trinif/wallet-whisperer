@@ -48,7 +48,7 @@ Transaction.createIndexes();
 
 // For backend and express
 const app = express();
-console.log("App listening at port 5000");
+console.log("App listening at port 8080");
 app.use(express.json());
 app.use(cors());
 app.get("/", (req, resp) => {
@@ -71,4 +71,4 @@ app.put("/updateTransaction/:id", async (req, res) => {
     }
   });
 
-app.listen(5000);
+app.listen(8080);
