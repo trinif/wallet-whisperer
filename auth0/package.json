@@ -1,0 +1,71 @@
+{
+  "name": "auth0-react-sample",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "npm-run-all --parallel spa api-server",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "spa": "react-scripts start",
+    "server": "node server.js",
+    "server:dev": "nodemon server.js",
+    "api-server": "node api-server.js",
+    "api-server:dev": "nodemon api-server.js",
+    "dev": "npm-run-all --parallel spa api-server:dev",
+    "prod": "npm-run-all --parallel server api-server"
+  },
+  "dependencies": {
+    "@auth0/auth0-react": "^2.2.0",
+    "@babel/core": "^7.23",
+    "@babel/plugin-syntax-flow": "^7.23",
+    "@babel/plugin-transform-react-jsx": "^7.23",
+    "@fortawesome/fontawesome-svg-core": "^1.2",
+    "@fortawesome/free-solid-svg-icons": "^5.8",
+    "@fortawesome/react-fontawesome": "^0.2",
+    "autoprefixer": "^10.4",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-oauth2-jwt-bearer": "^1.6.0",
+    "fs": "^0.0.1-security",
+    "helmet": "^4.4",
+    "highlight.js": "^10.0",
+    "morgan": "^1.9",
+    "npm-run-all": "^4.1",
+    "postcss": "^8.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-router-dom": "^5.3",
+    "react-scripts": "^5.0",
+    "reactstrap": "^9.2",
+    "typescript": "^4.9"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.17",
+    "@testing-library/react": "^14.1",
+    "jest-environment-jsdom": "^27.0",
+    "jest-fetch-mock": "^3.0",
+    "nodemon": "^2.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "This sample demonstrates the integration of [Auth0 React SDK](https://github.com/auth0/auth0-react) into a React application created using [create-react-app](https://reactjs.org/docs/create-a-new-react-app.html). The sample is a companion to the [Auth0 React SDK Quickstart](https://auth0.com/docs/quickstart/spa/react).",
+  "main": "api-server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
