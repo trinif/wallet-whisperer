@@ -5,7 +5,7 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { getConfig } from "../config";
 import Loading from "../components/Loading";
 import axios from 'axios';
-import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Slider } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 export const TransactionsComponent = () => {
@@ -15,6 +15,8 @@ export const TransactionsComponent = () => {
   const [loading, setLoading] = useState(true); 
 
   const [transactions, setTransactions] = useState([]);
+
+  const [satisfaction, setSatisfaction] = useState([1, 5]);
   
   const loadCustomers = () => {
     axios.get("http://localhost:3001/customers")
@@ -84,7 +86,16 @@ export const TransactionsComponent = () => {
               <TableCell>{t.purchase_date}</TableCell>
               <TableCell>{t.description}</TableCell>
               <TableCell>{t.amount}</TableCell>
-              <TableCell>{}</TableCell>
+              <TableCell>
+                <Slider
+                  value={[]}
+                  min={1}
+                  max={5}
+                  step={1}
+                  onChange={(e, newValue) => setSatisfaction(newValue)}
+                  valueLabelDisplay='auto'
+                />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
