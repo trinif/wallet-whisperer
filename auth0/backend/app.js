@@ -11,7 +11,7 @@ dotenv.config();
 const server = express(); 
 
 server.use(cors({
-    origin: 'http://localhost:3002',  // Allow frontend to make requests
+    origin: 'http://localhost:3001',  // Allow frontend to make requests
   }));
 
 server.use(express.json());
@@ -20,7 +20,7 @@ server.use('/api/directions', directionsRouter);
 server.use('/customers', customersRouter);
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001; // use 3001 for API
 
 // Use CORS middleware
 

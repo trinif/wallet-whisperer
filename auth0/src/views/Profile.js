@@ -7,14 +7,6 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
 export const ProfileComponent = () => {
   const { user } = useAuth0();
-  /* const updateStatus = () => {
-    fetch("/updateLookupTable", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pending: "🟡 Pending", approved: "✅ Approved", new_status: "🌟 New Status" }),
-    }).then((res) => res.json()).then(console.log);
-  };
-  updateStatus(); */
 
   return (
     <Container className="mb-5">
