@@ -15,6 +15,7 @@ export function getConfig() {
   return {
     domain: configJson.domain,
     clientId: configJson.clientId,
+    api_key: configJson.api_key,
     ...(audience ? { audience } : null),
   };
 }
