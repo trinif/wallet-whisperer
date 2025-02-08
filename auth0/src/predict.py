@@ -7,7 +7,8 @@ app = Flask(__name__)
 model = joblib.load('prediction_model.joblib')
 
 # Define the prediction route
-@app.route('/', methods=['POST'])
+@app.route('/predict',
+           methods=['POST'])
 def predict():
     try:
         # Get the input features from the request
@@ -22,3 +23,6 @@ def predict():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)  # Run on port 5000
