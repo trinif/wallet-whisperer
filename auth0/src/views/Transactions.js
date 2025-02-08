@@ -4,42 +4,51 @@ import Highlight from "../components/Highlight";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { getConfig } from "../config";
 import Loading from "../components/Loading";
+import axios from 'axios';
 
 export const TransactionsComponent = () => {
-  const [mongoStatus, setMongoStatus] = useState("Connecting to MongoDB...");
+
+  const [customers, setCustomers] = useState([]); // State to hold customer data
+  const [loading, setLoading] = useState(true); 
+  
+  const loadCustomers = () => {
+    axios.get("http://localhost:3000/customers")
+      .then((response) => {
+        setCustomers(response.data);
+        console.log(response.data) // Save response data to state
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching info:", error);
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
-    const pingMongo = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api/ping");
-        const data = await response.json();
-
-        if (response.ok) {
-          setMongoStatus(data.message);
-        } else {
-          setMongoStatus(`Error: ${data.message}`);
-        }
-      } catch (error) {
-        setMongoStatus(`Error: ${error.message}`);
-      }
-    };
-
-    pingMongo();
+    console.log("Loading customers...");
+    loadCustomers(); // Load customers when the component mounts
   }, []);
+
+  if (loading) {
+    return <p>Loading customers...</p>;
+  }
 
   return (
     <>
       <div className="mb-5">
         
         <h1>Rate Transactions</h1>
-        <p className="lead">
-          View past purchases
-        </p>
-
-        <p>
-          {mongoStatus}
-        </p>
-
+        {customers.length === 0 ? (
+        <p>No customers found.</p>
+      ) : (
+        <ul>
+          {customers.map((customer, index) => (
+            <li key={index}>
+              {customer.name} - {customer.email}
+            </li>
+          ))}
+        </ul>
+      )}
       </div>
     </>
   );
