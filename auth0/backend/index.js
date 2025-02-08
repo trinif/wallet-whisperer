@@ -4,7 +4,7 @@ import express from 'express'
 import cors from 'cors'
 
 // api url
-mongoose.connect('mongodb+srv://neha:mongodb321!@walletwhisperer.gykjp.mongodb.net/items?authSource=admin', {
+mongoose.connect('mongodb+srv://neha:mongodb321!@walletwhisperer.gykjp.mongodb.net/', {
     dbName: 'items',
     useNewUrlParser: true,
     useUnifiedTopology: true
