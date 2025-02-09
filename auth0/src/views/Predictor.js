@@ -57,6 +57,7 @@ export const PredictorComponent = () => {
       // Flask server for predictions is localhost:5000 by default
       const response = await fetch('http://localhost:5000/predict', {
         method: 'POST',
+        mode: "cors",
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'

@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 # Retrieve stored model (from train.py)
 app = Flask(__name__)
-CORS(app, supports_credentials=False)
+CORS(app, supports_credentials=False, origins='http://localhost:3000')
 
 model = joblib.load('models/prediction_model.joblib')
 
@@ -22,11 +22,13 @@ def predict():
         prediction = model.predict(features)
         # Send back the prediction as a JSON response
         response = jsonify({'prediction': prediction.tolist()})
-        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Origin')
         response.headers.add('Access-Control-Allow-Headers', '*')
         response.headers.add('Access-Control-Allow-Methods', '*')
         response.headers.add('Access-Control-Allow-Credentials', 'true')
-        return response
+        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+        response.headers.add('Access-Control-Max-Age', '300')
+        return response, 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 400
