@@ -39,10 +39,41 @@ const styles = {
     borderRadius: '5px',
     width: '100%',
     transition: 'backgroundColor 0.3s ease',
-}
+  }
 };
 
 export const PredictorComponent = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Store form data as JSON
+    const data = {
+      amount: document.getElementById("amount").value,
+      merchant_id: document.getElementById("merchant").value,
+      description: document.getElementById("description").value
+    };
+    console.log("in handler")
+    try {
+      // Flask server for predictions is localhost:5000 by default
+      const response = await fetch('http://localhost:5000/predict', {
+        method: 'POST',
+        mode: "cors",
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify(data),
+      });
+      console.log(response.body);
+
+      // Handle the response
+      const result = await response.json();
+      console.log(result)
+
+    } catch (ex) {
+      console.error('Error fetching prediction:', ex);
+    }
+  };
 
   return (
     <>
@@ -53,7 +84,7 @@ export const PredictorComponent = () => {
           What are you thinking of purchasing?
         </p>
 
-        <form id="itemForm" style={styles.form}>
+        <form id="itemForm" style={styles.form} onSubmit={handleSubmit} >
           <label>Store:</label>
           <input type="text" id="merchant" style={styles.input} required />
           <br></br>
@@ -63,7 +94,7 @@ export const PredictorComponent = () => {
           <br></br>
 
           <label>Item:</label>
-          <input type="text" id="merchant" style={styles.input} required />
+          <input type="text" id="description" style={styles.input} required />
           <br></br>
 
           <button type="submit" style={styles.button}>Predict Satisfaction</button>

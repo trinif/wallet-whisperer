@@ -21,7 +21,8 @@ export const Home = () => {
     fetch(`http://localhost:3002/updateLookupTable`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userid: user, accountid: "67a7830c9683f20dd518bbd8"}),
+      // accountid hardcoded to spending until transactions displays
+      body: JSON.stringify({ userid: user, accountid: "67a7bb309683f20dd518bcae"}),
     }).then(res => console.log(res));
   };
 
