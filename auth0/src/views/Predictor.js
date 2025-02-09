@@ -43,35 +43,32 @@ const styles = {
 };
 
 export const PredictorComponent = () => {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0.0);
-  const [merchant, setMerchant] = useState("");
-  // const [data, setData] = useState({ amount: 0.00, merchant_id: "merchant", description: "" });
-
-  /* const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  }; */
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Store form data as JSON
-
+    const data = {
+      amount: document.getElementById("amount").value,
+      merchant_id: document.getElementById("merchant").value,
+      description: document.getElementById("description").value
+    };
+    console.log("in handler")
     try {
       // Flask server for predictions is localhost:5000 by default
       const response = await fetch('http://localhost:5000/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify({"amount": price, "merchant_id": merchant, "description": name}),
+        body: JSON.stringify(data),
       });
       console.log(response.body);
 
       // Handle the response
       const result = await response.json();
       console.log(result)
-      
+
     } catch (ex) {
       console.error('Error fetching prediction:', ex);
     }
@@ -86,36 +83,17 @@ export const PredictorComponent = () => {
           What are you thinking of purchasing?
         </p>
 
-        <form id="itemForm" style={styles.form} onSubmit={handleSubmit}>
+        <form id="itemForm" style={styles.form} onSubmit={handleSubmit} >
           <label>Store:</label>
-          <input
-            type="text"
-            id="merchant"
-            style={styles.input} required
-            value={merchant}
-            onChange={(e) => setMerchant(e.target.value)}
-          />
+          <input type="text" id="merchant" style={styles.input} required />
           <br></br>
 
           <label>Price:</label>
-          <input
-            type="number"
-            id="amount"
-            style={styles.input} required
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
+          <input type="number" id="amount" style={styles.input} required />
           <br></br>
 
           <label>Item:</label>
-          <input
-            type="text"
-            id="description"
-            style={styles.input} required
-            placeholder="Enter Item"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <input type="text" id="description" style={styles.input} required />
           <br></br>
 
           <button type="submit" style={styles.button}>Predict Satisfaction</button>
