@@ -4,6 +4,7 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { getConfig } from "../config";
 import Loading from "../components/Loading";
 import axios from 'axios';
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Slider } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
@@ -42,6 +43,19 @@ export const TransactionsComponent = () => {
   const [ratings, setRatings] = useState({});
   const [loading, setLoading] = useState(true);
 >>>>>>> 6a78c25c4e033cb640631f8afcf37e167e08646d
+=======
+import { Slider, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+
+export const TransactionsComponent = () => {
+
+  // const api_url = 
+  const [customers, setCustomers] = useState([]); // State to hold customer data
+
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const [rowState, setRowStates] = useState({});
+>>>>>>> Stashed changes
 
   const getTransactions = () => {
     fetch(`http://api.nessieisreal.com/accounts/67a7bb309683f20dd518bcae/purchases?key=1791db7671050f930946a58ec2de3ed2`, {
@@ -54,6 +68,7 @@ export const TransactionsComponent = () => {
         setTransactions(transWithId);
         setLoading(false);
       })
+<<<<<<< Updated upstream
       .catch(error => {
         console.error("Error fetching transactions:", error);
         setLoading(false);
@@ -70,6 +85,26 @@ export const TransactionsComponent = () => {
       [transactionId]: rating,
     }));
     console.log(`Transaction ID: ${transactionId}, Rating: ${rating}`);
+=======
+      .then(setLoading(false))
+  }
+
+  useEffect(() => {
+    console.log("Loading customers...");
+    getTransactions();
+    //loadCustomers(); // Load customers when the component mounts
+  }, []);
+
+  const handleRating = (rowId, value) => {
+    setRowStates((prev) => ({
+      ...prev,
+      [rowId]: {
+        ...prev[rowId],
+        satisfaction: value,
+      },
+    }));
+    console.log(`Transaction ID: ${rowId}, Rating: ${value}`);
+>>>>>>> Stashed changes
   };
 
   if (loading) {
@@ -81,6 +116,7 @@ export const TransactionsComponent = () => {
       <div className="mb-5">
         <h1>Rate Transactions</h1>
         {transactions.length === 0 ? (
+<<<<<<< Updated upstream
 <<<<<<< HEAD
         <p>No customers found.</p>
       ) : (
@@ -117,6 +153,8 @@ export const TransactionsComponent = () => {
     </TableContainer>
       )}
 =======
+=======
+>>>>>>> Stashed changes
           <p>No transactions found.</p>
         ) : (
           <TableContainer component={Paper}>
@@ -150,7 +188,10 @@ export const TransactionsComponent = () => {
             </Table>
           </TableContainer>
         )}
+<<<<<<< Updated upstream
 >>>>>>> 6a78c25c4e033cb640631f8afcf37e167e08646d
+=======
+>>>>>>> Stashed changes
       </div>
     </Container>
   );
