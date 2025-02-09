@@ -5,8 +5,12 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { getConfig } from "../config";
 import Loading from "../components/Loading";
 import axios from 'axios';
+<<<<<<< Updated upstream
 import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Slider } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
+=======
+import { Slider, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+>>>>>>> Stashed changes
 
 export const TransactionsComponent = () => {
 
@@ -15,6 +19,7 @@ export const TransactionsComponent = () => {
   const [loading, setLoading] = useState(true); 
 
   const [transactions, setTransactions] = useState([]);
+<<<<<<< Updated upstream
 
   const [satisfaction, setSatisfaction] = useState([1, 5]);
   
@@ -39,6 +44,11 @@ export const TransactionsComponent = () => {
       { field: 'purchase_date', headerName: 'Date' },
       { field: 'satisfaction', headerName: 'Satisfaction' }
   ]
+=======
+  const [loading, setLoading] = useState(true);
+>>>>>>> Stashed changes
+
+  const [rowState, setRowStates] = useState({});
 
   const getTransactions = () => {
     fetch(`http://api.nessieisreal.com/accounts/67a7bb309683f20dd518bcae/purchases?key=1791db7671050f930946a58ec2de3ed2`, {
@@ -58,6 +68,20 @@ export const TransactionsComponent = () => {
     //loadCustomers(); // Load customers when the component mounts
   }, []);
 
+<<<<<<< Updated upstream
+=======
+  const handleRating = (rowId, value) => {
+    setRowStates((prev) => ({
+      ...prev,
+      [rowId]: {
+        ...prev[rowId],
+        satisfaction: value,
+      },
+    }));
+    console.log(`Transaction ID: ${rowId}, Rating: ${value}`);
+  };
+
+>>>>>>> Stashed changes
   if (loading) {
     return <p>Loading customers...</p>;
   }
@@ -68,6 +92,7 @@ export const TransactionsComponent = () => {
         
         <h1>Rate Transactions</h1>
         {transactions.length === 0 ? (
+<<<<<<< Updated upstream
         <p>No customers found.</p>
       ) : (
         <TableContainer component={Paper}>
@@ -102,6 +127,42 @@ export const TransactionsComponent = () => {
       </Table>
     </TableContainer>
       )}
+=======
+          <p>No transactions found.</p>
+        ) : (
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell><strong>Date</strong></TableCell>
+                  <TableCell><strong>Description</strong></TableCell>
+                  <TableCell><strong>Price</strong></TableCell>
+                  <TableCell><strong>Satisfaction</strong></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {transactions.map((t) => (
+                  <TableRow key={t._id}>
+                    <TableCell>{t.purchase_date}</TableCell>
+                    <TableCell>{t.description}</TableCell>
+                    <TableCell>${t.amount}</TableCell>
+                    <TableCell>
+                      <Slider
+                        value={rowState.satisfaction}
+                        min={1}
+                        max={5}
+                        step={1}
+                        onChange={(e) => handleRating(t._id, e.target.value)}
+                        valueLabelDisplay='auto'
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+>>>>>>> Stashed changes
       </div>
     </Container>
   );
